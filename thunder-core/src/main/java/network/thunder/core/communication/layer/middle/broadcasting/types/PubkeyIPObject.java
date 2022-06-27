@@ -145,7 +145,17 @@ public class PubkeyIPObject extends P2PDataObject {
                 }
             }
         }
-        fullList.removeAll(temp);
+        /* ********OpenRefactory Warning********
+		 Possible null pointer Dereference!
+		 Path: 
+			File: ConnectionManagerImpl.java, Line: 195
+				ipList=PubkeyIPObject.removeFromListByPubkey(ipList,alreadyFetched);
+				 Information is passed through the method call via ipList to the formal param fullList of the method. This later results into a null pointer dereference.
+			File: PubkeyIPObject.java, Line: 148
+				fullList.removeAll(temp);
+				fullList is referenced in method invocation.
+		*/
+		fullList.removeAll(temp);
         return fullList;
     }
 
