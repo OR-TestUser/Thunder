@@ -381,7 +381,17 @@ public class LNEstablishProcessorImpl extends LNEstablishProcessor implements Ch
 
         establishProgress.channel.channelSignatures = paymentLogic.getSignatureObject(establishProgress.channel, channelTransaction);
 
-        LNEstablish message = messageFactory.getEstablishMessageB(establishProgress.channel.channelSignatures.channelSignatures.get(0));
+        /* ********OpenRefactory Warning********
+		 Possible null pointer Dereference!
+		 Path: 
+			File: LNEstablishProcessorImpl.java, Line: 382
+				establishProgress.channel.channelSignatures=paymentLogic.getSignatureObject(establishProgress.channel,channelTransaction);
+				Variable establishProgress.channel.channelSignatures is assigned null.
+			File: LNEstablishProcessorImpl.java, Line: 384
+				LNEstablish message=messageFactory.getEstablishMessageB(establishProgress.channel.channelSignatures.channelSignatures.get(0));
+				channelSignatures is referenced in field access.
+		*/
+		LNEstablish message = messageFactory.getEstablishMessageB(establishProgress.channel.channelSignatures.channelSignatures.get(0));
         establishProgress.messages.add(message);
         messageExecutor.sendMessageUpwards(message);
     }
