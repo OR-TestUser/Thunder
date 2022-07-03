@@ -313,7 +313,17 @@ public class ConnectionManagerImpl implements ConnectionManager, ConnectionRegis
         ClientObject node = new ClientObject();
         node.isServer = false;
         node.intent = intent;
-        node.pubKeyClient = ECKey.fromPublicOnly(ipObject.pubkey);
+        /* ********OpenRefactory Warning********
+		 Possible null pointer Dereference!
+		 Path: 
+			File: ConnectionManagerImpl.java, Line: 126
+				ClientObject clientObject=ipObjectToNode(ipObject,ConnectionIntent.MISC);
+				 Information is passed through the method call via ipObject to the formal param ipObject of the method. This later results into a null pointer dereference.
+			File: ConnectionManagerImpl.java, Line: 316
+				node.pubKeyClient=ECKey.fromPublicOnly(ipObject.pubkey);
+				ipObject is referenced in field access.
+		*/
+		node.pubKeyClient = ECKey.fromPublicOnly(ipObject.pubkey);
         node.host = ipObject.hostname;
         node.port = ipObject.port;
         return node;
