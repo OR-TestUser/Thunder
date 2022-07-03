@@ -80,7 +80,14 @@ public class ChannelInfoController {
 
         labelOpen.setText(new Date(((long) channel.getTimestampOpen()) * 1000).toString());
 
-        txOpen.setText(Tools.bytesToHex(channel.anchorTx.bitcoinSerialize()));
+        /* ********OpenRefactory Warning********
+		 Possible null pointer Dereference!
+		 Path: 
+			File: ChannelInfoController.java, Line: 83
+				txOpen.setText(Tools.bytesToHex(channel.anchorTx.bitcoinSerialize()));
+				anchorTx is referenced in method invocation.
+		*/
+		txOpen.setText(Tools.bytesToHex(channel.anchorTx.bitcoinSerialize()));
 
     }
 
