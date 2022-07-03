@@ -130,7 +130,90 @@ public class ScriptRunner {
      */
     private void println (Object o) {
         if (logWriter != null) {
-            logWriter.println(o);
+            
+			/* ********OpenRefactory Warning********
+			 Possible XSS attack!
+			Path: 
+				File: ScriptRunner.java, Line: 189
+					while ((line=lineReader.readLine()) != null) {
+					  if (command == null) {
+					    command=new StringBuffer();
+					  }
+					  String trimmedLine=line.trim();
+					  if (trimmedLine.startsWith("--")) {
+					    println(trimmedLine);
+					  }
+					 else   if (trimmedLine.length() < 1 || trimmedLine.startsWith("//")) {
+					  }
+					 else   if (trimmedLine.length() < 1 || trimmedLine.startsWith("--")) {
+					  }
+					 else   if (!fullLineDelimiter && trimmedLine.endsWith(getDelimiter()) || fullLineDelimiter && trimmedLine.equals(getDelimiter())) {
+					    command.append(line.substring(0,line.lastIndexOf(getDelimiter())));
+					    command.append(" ");
+					    Statement statement=conn.createStatement();
+					    println(command);
+					    boolean hasResults=false;
+					    if (stopOnError) {
+					      hasResults=statement.execute(command.toString());
+					    }
+					 else {
+					      try {
+					        statement.execute(command.toString());
+					      }
+					 catch (      SQLException e) {
+					        e.fillInStackTrace();
+					        printlnError("Error executing: " + command);
+					        printlnError(e);
+					      }
+					    }
+					    if (autoCommit && !conn.getAutoCommit()) {
+					      conn.commit();
+					    }
+					    ResultSet rs=statement.getResultSet();
+					    if (hasResults && rs != null) {
+					      ResultSetMetaData md=rs.getMetaData();
+					      int cols=md.getColumnCount();
+					      for (int i=0; i < cols; i++) {
+					        String name=md.getColumnLabel(i);
+					        print(name + "\t");
+					      }
+					      println("");
+					      while (rs.next()) {
+					        for (int i=0; i < cols; i++) {
+					          String value=rs.getString(i);
+					          print(value + "\t");
+					        }
+					        println("");
+					      }
+					    }
+					    command=null;
+					    try {
+					      statement.close();
+					    }
+					 catch (    Exception e) {
+					    }
+					    Thread.yield();
+					  }
+					 else {
+					    command.append(line);
+					    command.append(" ");
+					  }
+					}
+					Variable line is assigned a tainted value from external source
+				File: ScriptRunner.java, Line: 201
+					command.append(line.substring(0,line.lastIndexOf(getDelimiter())));
+					Tainted information passed through method invocation
+				File: ScriptRunner.java, Line: 202
+					command.append(" ");
+					Tainted information passed through method invocation
+				File: ScriptRunner.java, Line: 205
+					println(command);
+					Tainted information is passed through the method call via command to the formal param o of the method.
+				File: ScriptRunner.java, Line: 133
+					logWriter.println(o);
+					Tainted information used in a sink.
+			*/
+			logWriter.println(o);
         }
     }
 
