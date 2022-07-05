@@ -82,7 +82,17 @@ public class LNOnionHelperImpl implements LNOnionHelper {
             byte[] dataToSign = new byte[OnionObject.DATA_LENGTH];
             System.arraycopy(data, 0, temp, OnionObject.DATA_LENGTH, data.length - OnionObject.DATA_LENGTH);
 
-            ECKey key = ECKey.fromPublicOnly(nodeList.get(nodeList.size() - 1 - i));
+            /* ********OpenRefactory Warning********
+			 Possible null pointer Dereference!
+			 Path: 
+				File: ThunderContext.java, Line: 103
+					OnionObject object=onionHelper.createOnionObject(route,null);
+					 Information is passed through the method call via route to the formal param nodeList of the method. This later results into a null pointer dereference.
+				File: LNOnionHelperImpl.java, Line: 85
+					ECKey key=ECKey.fromPublicOnly(nodeList.get(nodeList.size() - 1 - i));
+					nodeList is referenced in method invocation.
+			*/
+			ECKey key = ECKey.fromPublicOnly(nodeList.get(nodeList.size() - 1 - i));
             ECKey keyServer = CryptoTools.getEphemeralKey();
             ECDHKeySet keySet = ECDH.getSharedSecret(keyServer, key);
 
