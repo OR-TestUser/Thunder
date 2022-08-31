@@ -179,7 +179,7 @@ public class Base58 {
             int digit = (int) number[i] & 0xFF;
             int temp = remainder * base + digit;
             number[i] = (byte) (temp / divisor);
-            remainder = temp % divisor;
+            remainder = ((divisor != 0) ? (temp % divisor) : 0);
         }
         return (byte) remainder;
     }
