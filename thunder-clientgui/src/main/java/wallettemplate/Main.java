@@ -48,7 +48,7 @@ public class Main extends Application {
     private StackPane uiStack;
     private Pane mainUI;
     public MainController controller;
-    public NotificationBarPane notificationBar;
+    private NotificationBarPane notificationBar;
     public Stage mainWindow;
 
     public static int CLIENTID = 1;
@@ -302,4 +302,8 @@ public class Main extends Application {
 
         launch(args);
     }
+
+	public NotificationBarPane getNotificationBar() {
+		return notificationBar;
+	}
 }

@@ -62,7 +62,7 @@ public class CreateChannelController {
 
     @FXML
     void send (ActionEvent event) {
-        Main.instance.notificationBar.pushItem("Open Channel..", BitcoinUIModel.syncProgress);
+        Main.instance.getNotificationBar().pushItem("Open Channel..", BitcoinUIModel.syncProgress);
 
         overlayUI.done();
         try {
