@@ -174,7 +174,18 @@ public class Tools {
     }
 
     public static <T extends Object> T getRandomItemFromList (List<T> list) {
-        int randomNumber = new SecureRandom().nextInt(list.size());
+        
+		/* ********OpenRefactory Warning********
+		 Possible null pointer Dereference!
+		 Path: 
+			File: ConnectionManagerImpl.java, Line: 347
+				PubkeyIPObject pubkeyIPObject=Tools.getRandomItemFromList(ipObjects);
+				 Information is passed through the method call via ipObjects to the formal param list of the method. This later results into a null pointer dereference.
+			File: Tools.java, Line: 177
+				int randomNumber=new SecureRandom().nextInt(list.size());
+				list is referenced in method invocation.
+		*/
+		int randomNumber = new SecureRandom().nextInt(list.size());
         return list.get(randomNumber);
     }
 
