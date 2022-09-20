@@ -141,7 +141,15 @@ public class InMemoryDBHandler implements DBHandler {
         for (P2PDataObject obj : dataList) {
             fragmentToListMap.get(obj.getFragmentIndex()).add(obj);
             if (obj instanceof PubkeyIPObject) {
-                if (!pubkeyIPList.contains(obj)) {
+                
+				/* ********OpenRefactory Warning********
+				 Type Mismatch Found in Node: 
+				
+				  pubkeyIPList.contains(obj)
+				
+				Method contains Expects Type PubkeyIPObject but the Type of the Parameter is P2PDataObject
+				*/
+				if (!pubkeyIPList.contains(obj)) {
                     pubkeyIPList.add((PubkeyIPObject) obj);
                 }
             } else if (obj instanceof PubkeyChannelObject) {
