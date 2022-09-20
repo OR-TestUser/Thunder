@@ -31,7 +31,7 @@ public class CryptoTools {
     public static byte[] getHMAC (byte[] data, byte[] keyBytes) {
         try {
             SecretKeySpec keySpec = new SecretKeySpec(keyBytes, "HmacSHA1");
-            Mac mac = Mac.getInstance("HmacSHA1");
+            Mac mac = Mac.getInstance("HmacSHA256");
             mac.init(keySpec);
             return mac.doFinal(data);
         } catch (Exception e) {
