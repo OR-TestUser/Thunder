@@ -48,7 +48,15 @@ public class MockChannelManager implements ChannelManager {
 
     @Override
     public void closeChannel (Channel channel, ResultCommand callback) {
-        if (closeProcessorMap.containsKey(channel)) {
+        
+		/* ********OpenRefactory Warning********
+		 Type Mismatch Found in Node: 
+		
+		  closeProcessorMap.containsKey(channel)
+		
+		Method containsKey Expects Type NodeKey but the Type of the Parameter is Channel
+		*/
+		if (closeProcessorMap.containsKey(channel)) {
             closeProcessorMap.get(channel).closeChannel(channel, callback);
         }
 
