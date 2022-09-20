@@ -171,6 +171,6 @@ public class ElasticInterpolator extends EasingInterpolator {
         } else {
             s = p / (2 * Math.PI) * Math.asin(1 / a);
         }
-        return -(a * Math.pow(2, 10 * (v -= 1)) * Math.sin((v - s) * (2 * Math.PI) / p));
+        return -(a * Math.pow(2, 10 * (v -= 1)) * Math.sin(((p != 0) ? ((v - s) * (2 * Math.PI) / p) : 0)));
     }
 }
