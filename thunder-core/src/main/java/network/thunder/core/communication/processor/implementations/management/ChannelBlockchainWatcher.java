@@ -106,7 +106,7 @@ public class ChannelBlockchainWatcher extends BlockchainWatcher {
                 blockSince++;
             }
 
-            if (confirmations >= LNEstablishProcessorImpl.MIN_CONFIRMATIONS) {
+            if (confirmations >= LNEstablishProcessor.MIN_CONFIRMATIONS) {
                 channelManager.onAnchorDone(channel);
                 return true;
             } else {
