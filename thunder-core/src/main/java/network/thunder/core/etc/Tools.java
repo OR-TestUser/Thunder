@@ -262,7 +262,7 @@ public class Tools {
             out += o.getValue().value;
         }
         long diff = in - out;
-        float f = ((float) diff) / size;
+        float f = ((size != 0) ? (((float) diff) / size) : 0);
 
         if (f >= Constants.FEE_PER_BYTE_MIN) {
             if (f <= Constants.FEE_PER_BYTE_MAX) {
