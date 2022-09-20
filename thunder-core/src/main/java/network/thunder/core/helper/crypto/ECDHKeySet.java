@@ -13,7 +13,7 @@ public class ECDHKeySet implements Cloneable {
     public byte[] ivServer;
 
     public long counterIn;
-    public long counterOut;
+    private long counterOut;
 
     public ECDHKeySet (byte[] masterKey, byte[] serverPubkey, byte[] clientPubkey) throws NoSuchProviderException, NoSuchAlgorithmException {
         this.masterKey = masterKey;
@@ -61,5 +61,9 @@ public class ECDHKeySet implements Cloneable {
             throw new RuntimeException(e);
         }
     }
+
+	public long getCounterOut() {
+		return counterOut;
+	}
 
 }

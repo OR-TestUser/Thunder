@@ -18,7 +18,7 @@ public class MessageEncrypterImpl implements MessageEncrypter {
     public EncryptedMessage encrypt (Message data, ECDHKeySet keySet) {
         byte[] bytes = serializater.serializeMessage(data);
 
-        byte[] enc = CryptoTools.encryptAES_CTR(bytes, keySet.encryptionKey, keySet.ivServer, keySet.counterOut);
+        byte[] enc = CryptoTools.encryptAES_CTR(bytes, keySet.encryptionKey, keySet.ivServer, keySet.getCounterOut());
         byte[] hmac = CryptoTools.getHMAC(enc, keySet.hmacKey);
 
         return new EncryptedMessage(hmac, enc);
