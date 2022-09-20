@@ -178,7 +178,7 @@ public class Base58 {
         for (int i = firstDigit; i < number.length; i++) {
             int digit = (int) number[i] & 0xFF;
             int temp = remainder * base + digit;
-            number[i] = (byte) (temp / divisor);
+            number[i] = (byte) (((divisor != 0) ? (temp / divisor) : 0));
             remainder = temp % divisor;
         }
         return (byte) remainder;
