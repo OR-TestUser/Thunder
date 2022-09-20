@@ -339,7 +339,18 @@ public class LNPaymentProcessorImpl extends LNPaymentProcessor {
                 wrapper.statusReceiver = REFUNDED;
                 dbHandler.updatePaymentReceiver(wrapper);
             } else {
-                wrapper.statusSender = REFUNDED;
+                
+				/* ********OpenRefactory Warning********
+				 Possible null pointer Dereference!
+				 Path: 
+					File: LNPaymentProcessorImpl.java, Line: 337
+						PaymentWrapper wrapper=dbHandler.getPayment(payment.secret);
+						Variable wrapper is initialized null.
+					File: LNPaymentProcessorImpl.java, Line: 342
+						wrapper.statusSender=REFUNDED;
+						wrapper is referenced in field access.
+				*/
+				wrapper.statusSender = REFUNDED;
                 dbHandler.updatePaymentSender(wrapper);
             }
         }
