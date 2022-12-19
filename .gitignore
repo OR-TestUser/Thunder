@@ -6,8 +6,10 @@
 # Package Files #
 *.jar
 *.war
+\qwdjkqw d qwd
+k qwbdjhdeb 
 *.ear
-
+dfvefrv
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
@@ -55,3 +57,5 @@ blockheaders
 thunder-core/blockheaders
 
 thunder-clientgui/dependency-reduced-pom.xml
+*.json
+*.json*.json*.json*.json
